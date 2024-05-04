@@ -93,7 +93,6 @@ map.on('load', function () {
                            <a href="${props.TWITTER_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
                            <a href="${props.INSTAGRAM_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
                         </p>
-                        <p>Empower your community by sharing this interactive map with your congressional district representative to advocate for resilient infrastructure!</p>
                     </div>
                 `;
             } else if (feature.layer.id === 'counties-layer') {
