@@ -56,7 +56,6 @@ map.on('load', function () {
                 'step',
                 ['coalesce', ['get', 'FEMA_TOTAL_FEMA_DISASTERS'], 0],  // Uses 0 if FEMA_TOTAL_FEMA_DISASTERS is null
                 '#e6e6e5',  // Default color for 0 occurrences
-                0, '#e6e6e5',  // 0 occurrences
                 2, '#f8e0de',  // 1 to 2 occurrences
                 4, '#f5c6c2',  // 3 to 4 occurrences
                 6, '#eea3b6',  // 5 to 6 occurrences

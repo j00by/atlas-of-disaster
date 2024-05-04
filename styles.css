@@ -57,6 +57,7 @@ body {
     justify-content: space-between;
     padding: 3px 10px;
     color: #ffffff;
+    font-weight: bold;
 }
 
 /* Information icon top left for methodology */
