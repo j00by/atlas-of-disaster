@@ -22,7 +22,7 @@ map.on('load', function () {
         'type': 'fill',
         'source': 'districts',
         'paint': {
-            'fill-color': '#888888',  // Existing fill color
+            'fill-color': '#e6e6e5',  // Existing fill color
             'fill-opacity': 0.4,      // Existing opacity
             'fill-outline-color': '#000000'  // Setting black as the border color
         }
@@ -54,7 +54,7 @@ map.on('load', function () {
         'paint': {
             'fill-color': [
                 'step',
-                ['get', 'FEMA_TOTAL_FEMA_DISASTERS'],  // Retrieves the disaster count from the properties
+                ['coalesce', ['get', 'FEMA_TOTAL_FEMA_DISASTERS'], 0],  // Uses 0 if FEMA_TOTAL_FEMA_DISASTERS is null
                 '#e6e6e5',  // Default color for 0 occurrences
                 0, '#e6e6e5',  // 0 occurrences
                 2, '#f8e0de',  // 1 to 2 occurrences
