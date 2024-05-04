@@ -21,22 +21,6 @@ body {
     transform: translateX(-50%);
     z-index: 1000;
     pointer-events: none;
-    width: 250px; /* Fixed width for large screens */
-    height: 88px; /* Fixed height for large screens */
-}
-
-@media (max-width: 768px) {
-    .css-atlas-title {
-        width: 180px; /* Scaled down width for medium screens */
-        height: 63px; /* Scaled down height based on aspect ratio */
-    }
-}
-
-@media (max-width: 480px) {
-    .css-atlas-title {
-        width: 120px; /* Scaled down width for small screens */
-        height: 42px; /* Scaled down height based on aspect ratio */
-    }
 }
 
 
@@ -110,32 +94,3 @@ a:link, a:visited {
 a:hover, a:active {
     color: #9c335d;
 }
-
-/* Geocoder style adjustments */
-
-.mapboxgl-ctrl-geocoder {
-    font-size: 18px;
-    line-height: 24px;
-    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    position: absolute; /* Adjusted to position it over the map */
-    background-color: #fff;
-    width: auto; /* Adjust width as needed */
-    min-width: 100px; /* Minimum width to ensure usability */
-    z-index: 1; /* Ensure it's above other map elements */
-    border-radius: 4px;
-    transition: width .25s, min-width .25s;
-  
-    /* Positioning at the bottom right */
-    bottom: 20px; /* Margin from the bottom */
-    right: 20px; /* Margin from the right */
-  }
-  
-  /* Responsive adjustments for smaller screens */
-  @media (max-width: 600px) {
-    .mapboxgl-ctrl-geocoder {
-      font-size: 16px; /* Slightly smaller font size for small devices */
-      width: calc(100% - 40px); /* Adjust width for smaller screens */
-      bottom: 10px; /* Less margin from the bottom on small devices */
-      right: 10px; /* Less margin from the right on small devices */
-    }
-  }

@@ -5,13 +5,8 @@ const map = new mapboxgl.Map({
     center: [-91.874, 31.168],
     zoom: 6
 });
-// Add the control to the map.
-map.addControl(
-    new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-    })
-);
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
 
 
 map.on('load', function () {
