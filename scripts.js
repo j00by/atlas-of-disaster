@@ -2,8 +2,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiajAwYnkiLCJhIjoiY2x1bHUzbXZnMGhuczJxcG83YXY4c
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v10',
-    center: [-91.874, 31.168],
-    zoom: 6
+    center: [-97.97919, 40.00215],
+    zoom: 4
 });
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
@@ -56,6 +56,7 @@ map.on('load', function () {
                 'step',
                 ['get', 'FEMA_TOTAL_FEMA_DISASTERS'],  // Retrieves the disaster count from the properties
                 '#e6e6e5',  // Default color for 0 occurrences
+                0, '#e6e6e5',  // 0 occurrences
                 2, '#f8e0de',  // 1 to 2 occurrences
                 4, '#f5c6c2',  // 3 to 4 occurrences
                 6, '#eea3b6',  // 5 to 6 occurrences
