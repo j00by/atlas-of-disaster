@@ -53,19 +53,31 @@ map.on('load', function () {
         'source': 'counties',
         'paint': {
             'fill-color': [
-                'step',
-                ['coalesce', ['get', 'FEMA_TOTAL_FEMA_DISASTERS'], 0],  // Uses 0 if FEMA_TOTAL_FEMA_DISASTERS is null
-                '#e6e6e5',  // Default color for 0 occurrences
-                2, '#f8e0de',  // 1 to 2 occurrences
-                4, '#f5c6c2',  // 3 to 4 occurrences
-                6, '#eea3b6',  // 5 to 6 occurrences
-                9, '#e770a1',  // 7 to 9 occurrences
-                10, '#9c335d'  // 10+ occurrences
+                'match',
+                ['coalesce', ['get', 'FEMA_TOTAL_FEMA_DISASTERS'], 0], // Default to 0 if value is null
+                0, '#e6e6e5',
+                1, '#f8e0de',
+                2, '#f8e0de',
+                3, '#f5c6c2',
+                4, '#f5c6c2',
+                5, '#eea3b6',
+                6, '#eea3b6',
+                7, '#e770a1',
+                8, '#e770a1',
+                9, '#e770a1',
+                10, '#9c335d',
+                11, '#9c335d',
+                12, '#9c335d',
+                13, '#9c335d',
+                14, '#9c335d',
+                15, '#9c335d',
+                '#e6e6e5' // Default color used if none of the values match
             ],
             'fill-outline-color': '#ffffff',
             'fill-opacity': 0.8
         }
     });
+    
 
 
     // When a user clicks on a district, show a popup with contact information
