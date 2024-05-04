@@ -21,7 +21,24 @@ body {
     transform: translateX(-50%);
     z-index: 1000;
     pointer-events: none;
+    width: 250px; /* Fixed width for large screens */
+    height: 88px; /* Fixed height for large screens */
 }
+
+@media (max-width: 768px) {
+    .css-atlas-title {
+        width: 180px; /* Scaled down width for medium screens */
+        height: 63px; /* Scaled down height based on aspect ratio */
+    }
+}
+
+@media (max-width: 480px) {
+    .css-atlas-title {
+        width: 120px; /* Scaled down width for small screens */
+        height: 42px; /* Scaled down height based on aspect ratio */
+    }
+}
+
 
 /* Legend bottom left */
 #legend {
@@ -92,4 +109,23 @@ a:link, a:visited {
 
 a:hover, a:active {
     color: #9c335d;
+}
+
+/* Geocoder style adjustments */
+.mapboxgl-ctrl-geocoder {
+    width: auto; /* Allows flexible width but could be set to 100% if needed */
+    max-width: 400px; /* Maximum width to prevent it from being too wide on larger screens */
+    z-index: 1002; /* Higher than most other elements */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    .mapboxgl-ctrl-geocoder {
+        width: 95%; /* Almost full width to use available space */
+        position: absolute; /* Position it absolutely to ensure it's placed correctly */
+        top: 20px; /* Move it down to avoid clashing with any header */
+        left: 50%; /* Center align */
+        transform: translateX(-50%); /* Center align using transform */
+        max-width: none; /* Remove max-width restriction on small screens */
+    }
 }
