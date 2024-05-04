@@ -74,10 +74,10 @@ map.on('load', function () {
             <h4>${props.NAMELSAD20}</h4>
             <p><strong>${props.FIRSTNAME} ${props.LASTNAME} (${props.PARTY})</strong></p>
             <p>Empower your community by sharing this interactive map with your congressional district representative to advocate for resilient infrastructure!</p>
-            <p><a href="${props.WEBSITEURL}" target="_blank"><img src="/images/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
-               <a href="${props.FACE_BOOK_URL}" target="_blank"><img src="/images/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
-               <a href="${props.TWITTER_URL}" target="_blank"><img src="/images/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
-               <a href="${props.INSTAGRAM_URL}" target="_blank"><img src="/images/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
+            <p><a href="${props.WEBSITEURL}" target="_blank"><img src="/atlas-of-disaster/images/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
+               <a href="${props.FACE_BOOK_URL}" target="_blank"><img src="/atlas-of-disaster/images/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
+               <a href="${props.TWITTER_URL}" target="_blank"><img src="/atlas-of-disaster/images/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
+               <a href="${props.INSTAGRAM_URL}" target="_blank"><img src="/atlas-of-disaster/images/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
             </p>
         </div>
     `;
