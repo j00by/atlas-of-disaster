@@ -112,20 +112,30 @@ a:hover, a:active {
 }
 
 /* Geocoder style adjustments */
-.mapboxgl-ctrl-geocoder {
-    width: auto; /* Allows flexible width but could be set to 100% if needed */
-    max-width: 400px; /* Maximum width to prevent it from being too wide on larger screens */
-    z-index: 1002; /* Higher than most other elements */
-}
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 600px) {
+.mapboxgl-ctrl-geocoder {
+    font-size: 18px;
+    line-height: 24px;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, Helvetica, sans-serif;
+    position: absolute; /* Adjusted to position it over the map */
+    background-color: #fff;
+    width: auto; /* Adjust width as needed */
+    min-width: 100px; /* Minimum width to ensure usability */
+    z-index: 1; /* Ensure it's above other map elements */
+    border-radius: 4px;
+    transition: width .25s, min-width .25s;
+  
+    /* Positioning at the bottom right */
+    bottom: 20px; /* Margin from the bottom */
+    right: 20px; /* Margin from the right */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 600px) {
     .mapboxgl-ctrl-geocoder {
-        width: 95%; /* Almost full width to use available space */
-        position: absolute; /* Position it absolutely to ensure it's placed correctly */
-        top: 20px; /* Move it down to avoid clashing with any header */
-        left: 50%; /* Center align */
-        transform: translateX(-50%); /* Center align using transform */
-        max-width: none; /* Remove max-width restriction on small screens */
+      font-size: 16px; /* Slightly smaller font size for small devices */
+      width: calc(100% - 40px); /* Adjust width for smaller screens */
+      bottom: 10px; /* Less margin from the bottom on small devices */
+      right: 10px; /* Less margin from the right on small devices */
     }
-}
+  }
