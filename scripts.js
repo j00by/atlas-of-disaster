@@ -10,7 +10,7 @@ map.on('load', function () {
     // Load the GeoJSON file for congressional districts with representative names
     map.addSource('districts', {
         type: 'geojson',
-        data: '/data/State22Names.geojson'
+        data: '/atlas-of-disaster/data/State22Names.geojson'
     });
 
     // Add a layer for districts
@@ -40,7 +40,7 @@ map.on('load', function () {
     // Load the GeoJSON file for counties and fema declaration count
     map.addSource('counties', {
         type: 'geojson',
-        data: '/data/State22Counties.geojson'
+        data: '/atlas-of-disaster/data/State22Counties.geojson'
     });
 
     // Add a layer for counties
