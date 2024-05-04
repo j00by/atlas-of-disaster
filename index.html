@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Atlas of Disaster - FEMA Declarations (2011-2023)</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- LINK TO STYLESHEET -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- ATLAS OF DISASTER SVG FILE -->
+    <div class="css-atlas-title">
+        <img src="/images/atlas-title.png" alt="Atlas of Disaster - US Congress Districts & Representatives"
+            style="width: 250px; height: 88px">
+    </div>
+
+
+    <!-- MAPBOX MAP -->
+    <div id="map"></div>
+
+
+    <!-- LEGEND -->
+    <div id="legend">
+        <div><b>FEMA Disaster Count (2011-2023)</b></div>
+        <div class="color-bar">
+            <div class="color-description">
+                <span>0</span>
+                <span>2</span>
+                <span>4</span>
+                <span>6</span>
+                <span>8</span>
+                <span>10+</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFORMATION BOX TOP LEFT WITH METHODOLOGY -->
+    <div id="info-icon" style="position: absolute; top: 10px; left: 10px; cursor: pointer; z-index: 1001;">
+        <i class="fas fa-info-circle" style="font-size: 30px; color: #e770a1;"></i>
+    </div>
+    <div id="info-panel"
+        style="display: none; position: absolute; top: 10px; left: 10px; background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 8px; width: 300px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); z-index: 1000;">
+        <h2>Map Information</h2>
+        <p>Days with dangerously high temperatures are becoming more frequent in the United States as the planet gets
+            hotter. This map shows you where temperatures are rising fastest and makes it easy to reach your elected
+            officials.</p>
+        <h3>Methodology</h3>
+        <p>We matched projected climate change data provided by Probable Futures and Woodwell Climate Research Center to
+            U.S. counties.</p>
+    </div>
+
+    <!-- LINK TO SCRIPTS.JS -->
+    <script src="scripts.js"></script>
+
+</body>
+
+</html>
