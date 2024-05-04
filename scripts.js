@@ -5,6 +5,14 @@ const map = new mapboxgl.Map({
     center: [-91.874, 31.168],
     zoom: 6
 });
+// Add the control to the map.
+map.addControl(
+    new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    })
+);
+
 
 map.on('load', function () {
     // Load the GeoJSON file for congressional districts with representative names
@@ -32,7 +40,7 @@ map.on('load', function () {
         'source': 'districts',
         'layout': {},
         'paint': {
-            'line-color': '#000000',  // Black border color
+            'line-color': '#791c41',  // Black border color
             'line-width': 2  // Adjust line width here for thicker borders
         }
     });
@@ -53,49 +61,71 @@ map.on('load', function () {
                 'step',
                 ['get', 'FEMA_TOTAL_FEMA_DISASTERS'],  // Retrieves the disaster count from the properties
                 '#e6e6e5',  // Default color for 0 occurrences
-                1, '#f8e0de',  // 1 to 2 occurrences
-                3, '#f5c6c2',  // 3 to 4 occurrences
-                5, '#eea3b6',  // 5 to 6 occurrences
-                7, '#e770a1',  // 7 to 9 occurrences
+                2, '#f8e0de',  // 1 to 2 occurrences
+                4, '#f5c6c2',  // 3 to 4 occurrences
+                6, '#eea3b6',  // 5 to 6 occurrences
+                9, '#e770a1',  // 7 to 9 occurrences
                 10, '#9c335d'  // 10+ occurrences
             ],
-            'fill-outline-color': '#ffffff'  // White border for each county
+            'fill-outline-color': '#ffffff',
+            'fill-opacity': 0.8
         }
     });
 
 
     // When a user clicks on a district, show a popup with contact information
-    map.on('click', 'districts-layer', function (e) {
-        const props = e.features[0].properties;
+    // Initialize the popup globally if it needs to be accessed by different layers
+    var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
 
-        const popupHtml = `
-        <div style="min-width: 200px;">
-            <img src="${props.PHOTOURL}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin-left: auto; margin-right: auto;">
-            <h4>${props.NAMELSAD20}</h4>
-            <p><strong>${props.FIRSTNAME} ${props.LASTNAME} (${props.PARTY})</strong></p>
-            <p>Empower your community by sharing this interactive map with your congressional district representative to advocate for resilient infrastructure!</p>
-            <p><a href="${props.WEBSITEURL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
-               <a href="${props.FACE_BOOK_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
-               <a href="${props.TWITTER_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
-               <a href="${props.INSTAGRAM_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
-            </p>
-        </div>
-    `;
+    // When a user clicks on a district, show a popup with contact information
+    map.on('click', function (e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ['districts-layer', 'counties-layer'] });
+        var featureHTML = '';
 
-        new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(popupHtml)
+        features.forEach(function (feature) {
+            if (feature.layer.id === 'districts-layer') {
+                const props = feature.properties;
+                featureHTML += `
+                    <div style="min-width: 200px;">
+                    <img src="${props.PHOTOURL}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: block; margin-left: auto; margin-right: auto;">
+                        <p><strong>${props.FIRSTNAME} ${props.LASTNAME} (${props.PARTY})</strong></p>
+                        <p><strong>${props.NAMELSAD20}</strong></p>
+                        <p><a href="${props.WEBSITEURL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/id-card.svg" alt="Website" style="width: 24px; height: 24px;"></a>
+                           <a href="${props.FACE_BOOK_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/facebook.svg" alt="Facebook" style="width: 24px; height: 24px;"></a>
+                           <a href="${props.TWITTER_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/twitter.svg" alt="Twitter" style="width: 24px; height: 24px;"></a>
+                           <a href="${props.INSTAGRAM_URL}" target="_blank"><img src="https://j00by.github.io/atlas-of-disaster/images/instagram.svg" alt="Instagram" style="width: 24px; height: 24px;"></a>
+                        </p>
+                        <p>Empower your community by sharing this interactive map with your congressional district representative to advocate for resilient infrastructure!</p>
+                    </div>
+                `;
+            } else if (feature.layer.id === 'counties-layer') {
+                const props = feature.properties;
+                featureHTML += `
+                <h4 style="border-bottom: 2px solid #e770a1; padding-bottom: 5px;">${props.NAME} County has been affected by a total of ${props.FEMA_TOTAL_FEMA_DISASTERS} disasters declared by FEMA.</h4>
+                `;
+            }
+        });
+
+        // Display popup at the clicked location
+        popup.setLngLat(e.lngLat)
+            .setHTML(featureHTML)
             .addTo(map);
     });
 
+    // Update mouse settings to change on enter and leave of any interactive layer
+    ['districts-layer', 'counties-layer'].forEach(function (layer) {
+        map.on('mouseenter', layer, function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
 
-    map.on('mouseenter', 'districts-layer', function () {
-        map.getCanvas().style.cursor = 'pointer';
+        map.on('mouseleave', layer, function () {
+            map.getCanvas().style.cursor = '';
+        });
     });
 
-    map.on('mouseleave', 'districts-layer', function () {
-        map.getCanvas().style.cursor = '';
-    });
 
     // Information box top left for methodology
     document.getElementById('info-icon').addEventListener('click', function () {
@@ -106,5 +136,6 @@ map.on('load', function () {
             infoPanel.style.display = 'none';
         }
     });
+
 
 });
