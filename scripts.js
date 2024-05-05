@@ -129,53 +129,16 @@ map.on('load', function () {
 
 
 
+    // Update mouse settings to change on enter and leave of any interactive layer
+    ['districts-layer', 'counties-layer'].forEach(function (layer) {
+        map.on('mouseenter', layer, function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
 
-
-    
-    // When the mouse enters a feature in the 'counties-layer', update the feature state for 'hover'
-map.on('mouseenter', 'counties-layer', function (e) {
-    if (e.features.length > 0) {
-        // Change cursor to pointer
-        map.getCanvas().style.cursor = 'pointer';
-
-        // Set a feature state on the hovered district
-        map.setFeatureState(
-            { source: 'counties', id: e.features[0].id },
-            { hover: true }
-        );
-    }
-});
-
-// When the mouse leaves a feature in the 'counties-layer', reset the feature state
-map.on('mouseleave', 'counties-layer', function (e) {
-    if (e.features.length > 0) {
-        // Reset cursor style
-        map.getCanvas().style.cursor = '';
-
-        // Reset the feature state on the previously hovered district
-        map.removeFeatureState(
-            { source: 'counties', id: e.features[0].id },
-            'hover'
-        );
-    }
-});
-
-// Define a new paint property for the 'counties-layer' to use the feature state
-map.addLayer({
-    'id': 'counties-layer',
-    'type': 'fill',
-    'source': 'counties',
-    'paint': {
-        'fill-color': '#e6e6e5', // default fill color
-        'fill-opacity': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            1,    // when hover is true, opacity is 1
-            0.4   // when hover is false, opacity is 0.4 (original opacity)
-        ],
-        'fill-outline-color': '#000000'
-    }
-});
+        map.on('mouseleave', layer, function () {
+            map.getCanvas().style.cursor = '';
+        });
+    });
 
     
 });
