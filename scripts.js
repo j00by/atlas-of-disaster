@@ -39,7 +39,7 @@ map.on('load', function () {
         'source': 'districts',
         'layout': {},
         'paint': {
-            'line-color': '#791c41',  // Black border color
+            'line-color': '##000000',  // Black border color
             'line-width': 2  // Adjust line width here for thicker borders
         }
     });
@@ -125,16 +125,27 @@ map.on('load', function () {
             .addTo(map);
     });
 
-    // Update mouse settings to change on enter and leave of any interactive layer
-    ['districts-layer', 'counties-layer'].forEach(function (layer) {
-        map.on('mouseenter', layer, function () {
-            map.getCanvas().style.cursor = 'pointer';
-        });
+    
+    
+    // Update mouse settings and change style on hover for county layer
+map.on('mouseenter', 'counties-layer', function () {
+    // Change cursor to pointer
+    map.getCanvas().style.cursor = 'pointer';
 
-        map.on('mouseleave', layer, function () {
-            map.getCanvas().style.cursor = '';
-        });
-    });
+    // Increase opacity to 1 on hover to highlight the county
+    map.setPaintProperty('counties-layer', 'fill-opacity', 1);
+});
+
+// Reset county layer style on mouseleave
+map.on('mouseleave', 'counties-layer', function () {
+    // Reset cursor style
+    map.getCanvas().style.cursor = '';
+
+    // Reset the fill-opacity to previous value (0.8 as per your initial setup)
+    map.setPaintProperty('counties-layer', 'fill-opacity', 0.8);
+});
+
+
 
 
     // Information box top left for methodology
@@ -146,6 +157,6 @@ map.on('load', function () {
             infoPanel.style.display = 'none';
         }
     });
-
+    
 
 });
