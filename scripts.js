@@ -83,8 +83,8 @@ map.on('load', function () {
     // When a user clicks on a district, show a popup with contact information
     // Initialize the popup globally if it needs to be accessed by different layers
     var popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
+        closeButton: true,
+        closeOnClick: true
     });
 
     // When a user clicks on a district, show a popup with contact information
