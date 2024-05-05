@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiajAwYnkiLCJhIjoiY2x1bHUzbXZnMGhuczJxcG83YXY4c
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v10',
-    center: [[-125.11718, 25.08202],[-70.28920, 46.76662]],
+    center: [-97.97919, 40.00215],
     zoom: 4
 });
 // Add zoom and rotation controls to the map.
@@ -83,8 +83,8 @@ map.on('load', function () {
     // When a user clicks on a district, show a popup with contact information
     // Initialize the popup globally if it needs to be accessed by different layers
     var popup = new mapboxgl.Popup({
-        closeButton: true,  // Enable the close button
-        closeOnClick: false  // Keep the popup from closing when the map is clicked
+        closeButton: false,
+        closeOnClick: false
     });
 
     // When a user clicks on a district, show a popup with contact information
